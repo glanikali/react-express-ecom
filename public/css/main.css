@@ -1,0 +1,156 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+button {
+  font-family: "Poppins", sans-serif;
+  color: #0a2540;
+}
+
+p,
+li,
+a,
+label,
+input {
+  font-family: "Open Sans", sans-serif;
+  color: #425466;
+}
+
+li {
+  list-style: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+main {
+  min-height: 100vh;
+  background: #f6f9fc;
+}
+
+.grid-1 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-gap: 1rem;
+}
+
+.wrapper {
+  width: 90%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  grid-gap: 1em;
+  padding: 1em;
+}
+
+.nav-container {
+  display: flex;
+  grid-gap: 1rem;
+  background: #635bff;
+  height: 100%;
+  list-style: none;
+  place-content: center;
+  place-items: center;
+  padding: 1em;
+  position: relative;
+}
+
+.nav-container li {
+  position: relative;
+}
+
+.nav-container a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: white;
+  font-weight: bold;
+  transition: all 250ms ease-in-out;
+  opacity: 0.8;
+}
+
+.nav-container a:hover,
+.nav-container .active {
+  text-decoration: underline solid #00d4ff 20%;
+  opacity: 1;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.grid-products {
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.image-container {
+  position: relative;
+  max-height: 200px;
+  width: 100%;
+  overflow: hidden;
+}
+
+img {
+  object-fit: fill;
+  width: 100%;
+  height: 200px;
+  filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
+    drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+}
+
+.card {
+  padding: 1em;
+  border-radius: 10px;
+  filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
+    drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-gap: 1em;
+  background: white;
+}
+
+.btn {
+  font-size: 1.2rem;
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: #635bff;
+  color: white;
+  font-weight: bold;
+  transition: all 250ms ease-in-out;
+  width: 100%;
+  cursor: pointer;
+}
+.btn-2{
+  background:#00d4ff;
+}
+
+.btn:hover,
+.btn:active,
+.btn:focus {
+  background: black;
+  transform: translateY(-5px);
+}
+
+.single-product {
+  width: 25%;
+  margin: auto;
+}
+
+@media (min-width: 980px) {
+  .grid-products {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .main {
+    width: 75%;
+  }
+}
