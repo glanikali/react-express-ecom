@@ -5,7 +5,7 @@ import {
   notFound,
   postAddToCart,
   getSingleProduct,
-} from "../controller/shop";
+} from "../controller/shop.js";
 
 const router = Router();
 

@@ -3,7 +3,7 @@ import {
   getAddProductView,
   postProduct,
   getProduct,
-} from "../controller/admin";
+} from "../controller/admin.js";
 
 const router = Router();
 

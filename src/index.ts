@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import path from "path";
-import adminRoutes from './routes/admin';
-import shopRoutes from "./routes/shop";
+import adminRoutes from './routes/admin.js';
+import shopRoutes from "./routes/shop.js";
 // import cors from 'cors'
 
 const app: Express = express();

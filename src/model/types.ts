@@ -1,5 +1,4 @@
 export interface ProductClass {
-  id: number;
   name: string;
   price: number;
   image_url?: string;
@@ -12,4 +11,11 @@ export interface CartClass {
   total: number;
   removeFromCart(id: number): void;
   addToCart(): void;
+}
+
+export interface CartItems{
+  id:number;
+  name: string;
+  price: number;
+  image_url?: string;
 }

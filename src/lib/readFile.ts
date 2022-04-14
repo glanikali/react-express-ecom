@@ -1,5 +1,5 @@
 import fs from 'fs'
-import getDir from '../lib/getDir'
+import getDir from '../lib/getDir.js'
 
 const readFile = async (type:string) => {
   let dir = getDir(type) || '';

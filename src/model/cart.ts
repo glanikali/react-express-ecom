@@ -1,6 +1,6 @@
-import readFile from "../lib/readFile";
-import writeFile from "../lib/writeFile";
-import { CartClass, ProductClass } from "./types";
+import readFile from "../lib/readFile.js";
+import writeFile from "../lib/writeFile.js";
+import { CartClass, CartItems } from "./types";
 
 const type: string = "cart";
 
@@ -33,11 +33,11 @@ class Cart implements CartClass {
     const res = await writeFile(newCartItems, type);
   }
   static async fetchAll() {
-    const products: Array<ProductClass> = await readFile(type).then(
+    const products: Array<CartItems> = await readFile(type).then(
       (data: any) => JSON.parse(data)
     );
     return products;
   }
 }
 
-module.exports = Cart;
+export default Cart;
