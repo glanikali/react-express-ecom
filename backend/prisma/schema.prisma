@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
-   output = "../node_modules/.prisma/client"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -11,9 +11,46 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model users {
+  id       Int      @id @default(autoincrement())
+  username String
+  password String
+  email    String
+  cart     carts?
+  orders   orders[]
+}
+
 model products {
-  id Int @default(autoincrement()) @id
-  name String
-  price Int
-  image_url String
+  id        Int              @id @default(autoincrement())
+  name      String
+  price     Int
+  image_url String?
+  carts     productsOnCart[]
+}
+
+model carts {
+  id       Int              @id @default(autoincrement())
+  total    Int
+  products productsOnCart[]
+  userId   Int              @unique
+  user     users            @relation(fields: [userId], references: [id])
+  ordersId Int              @unique
+  orders   orders           @relation(fields: [ordersId], references: [id])
+
+}
+
+model productsOnCart {
+  cartId    Int
+  productId Int
+  carts     carts    @relation(fields: [cartId], references: [id])
+  products  products @relation(fields: [productId], references: [id])
+
+  @@id([cartId, productId])
+}
+
+model orders {
+  id     Int    @id @default(autoincrement())
+  userId Int    
+  user   users  @relation(fields: [userId], references: [id])
+  cart   carts?
 }
