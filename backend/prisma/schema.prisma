@@ -53,4 +53,5 @@ model orders {
   userId Int    
   user   users  @relation(fields: [userId], references: [id])
   cart   carts?
+  date   DateTime @default(now())
 }
