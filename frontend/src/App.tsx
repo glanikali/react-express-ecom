@@ -1,22 +1,16 @@
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout/Layout";
+import AddProducts from "./AddProducts";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p className="text-center">
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route path="/admin/add-product" element={<AddProducts />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   );
 }
 
