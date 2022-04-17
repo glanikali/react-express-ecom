@@ -21,11 +21,12 @@ model users {
 }
 
 model products {
-  id        Int              @id @default(autoincrement())
-  name      String
-  price     Int
-  image_url String?
-  carts     productsOnCart[]
+  id          Int              @id @default(autoincrement())
+  name        String
+  price       Int
+  image_url   String?
+  description String?
+  carts       productsOnCart[]
 }
 
 model carts {
@@ -50,7 +51,7 @@ model productsOnCart {
 
 model orders {
   id     Int    @id @default(autoincrement())
-  userId Int    
+  userId Int
   user   users  @relation(fields: [userId], references: [id])
   cart   carts?
 }
