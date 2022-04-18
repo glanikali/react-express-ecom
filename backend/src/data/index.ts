@@ -1,16 +1,19 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
 import { CartClass, ProductClass } from "../model/types";
 const prisma = new PrismaClient();
 
 export const newProductDB = async (product: ProductClass) => {
-  const { name, price, image_url } = product;
-  const createNewProduct = await prisma.products.create({
-    data: {
-      name,
-      price,
-      image_url,
-    },
-  });
+  const { name, price, image_url, description } = product;
+  const res = await prisma.products
+    .create({
+      data: {
+        name,
+        price,
+        image_url,
+        description,
+      },
+    })
+  return res;
 };
 
 export const fetchAllDB = async () => {

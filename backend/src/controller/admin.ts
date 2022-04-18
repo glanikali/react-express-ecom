@@ -1,7 +1,6 @@
 import path from "path";
 import Product from "../model/product.js";
 import { Request, Response, NextFunction } from "express";
-import { newProductDB } from "../data/index.js";
 
 export const getAddProductView = (
   req: Request,
@@ -16,17 +15,13 @@ export const postProduct = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { name, price, image_url } = req.body;
-
-  req.body.price = parseInt(req.body.price);
-
-  /// db
-  const res2 = await newProductDB(req.body);
-  console.log(res2);
-
-  const product = new Product(name, price, image_url);
-  product.save();
-  res.redirect("/");
+  const { name, price, image_url, description } = req.body;
+  const priceToInt = parseInt(req.body.price);
+  const product = new Product(name, priceToInt, image_url, description);
+  const result = await product
+    .save()
+    .then((res1) => res.status(200).json("complete"))
+    .catch((err) => res.status(400).json("bad request"));
 };
 
 export const getProduct = async (

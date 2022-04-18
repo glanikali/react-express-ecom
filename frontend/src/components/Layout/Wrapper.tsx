@@ -3,7 +3,7 @@ type Props = {
 };
 
 const Wrapper = ({ children }: Props) => {
-  return <div className="w-11/12 mx-auto sm:w-4/6 ">{children}</div>;
+  return <div className="w-11/12 mx-auto py-4 sm:w-4/6">{children}</div>;
 };
 
 export default Wrapper;

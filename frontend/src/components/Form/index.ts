@@ -8,7 +8,7 @@ export type FormData = {
 export const buildDefaultValues = () => {
   return {
     productName: "",
-    price: 0,
+    price: 1.00,
     image_url: "",
     description: "",
   };

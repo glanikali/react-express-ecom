@@ -4,7 +4,7 @@ type InputClassNameProps = {
 };
 
 export const ERROR_CLASSES =
-  "border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500";
+  "border-pink-500 text-pink-500 placeholder-pink-500 focus:outline-none focus:ring-pink-500 focus:border-pink-500";
 
 export function buildInputClassName({
   hasError = false,

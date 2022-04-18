@@ -11,7 +11,11 @@
   }
   p,
   li,
-  a {
+  a,
+  input,
+  label,
+  placeholder,
+  textarea {
     @apply font-body;
   }
 }

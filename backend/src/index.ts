@@ -1,10 +1,11 @@
 import express, { Express } from "express";
 import path from "path";
-import adminRoutes from './routes/admin.js';
+import adminRoutes from "./routes/admin.js";
 import shopRoutes from "./routes/shop.js";
-// import cors from 'cors'
+import { corsMiddleware } from "./cors/index.js";
 
 const app: Express = express();
+app.use(corsMiddleware);
 
 app.set("view engine", "pug");
 app.set("views", "views");

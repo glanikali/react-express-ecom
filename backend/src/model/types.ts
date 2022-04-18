@@ -2,6 +2,7 @@ export interface ProductClass {
   name: string;
   price: number;
   image_url?: string;
+  description?: string;
 }
 export interface CartClass {
   id: number;
