@@ -3,34 +3,34 @@ import { FormData, buildDefaultValues } from ".";
 import axios from "axios";
 import { useAppDispatch } from "../../store/hooks";
 import { addProductsActions } from "../../store/addProductsSlice";
+import { baseURL } from "../../lib/baseUrl";
+import useSWR, { useSWRConfig } from "swr";
 
 type Props = {
   children: React.ReactNode;
 };
 
 const AddProductsFormWrapper = ({ children }: Props) => {
-  const dispatch = useAppDispatch();
+  const { data } = useSWR(baseURL);
+  const { mutate } = useSWRConfig();
 
+  //form methods - form context
   const methods = useForm<FormData>({
     defaultValues: buildDefaultValues(),
   });
-
   const { handleSubmit } = methods;
 
-  const onSubmit = async (data: FormData) => {
+  //redux
+  const dispatch = useAppDispatch();
+
+  const onSubmit = async (formData: FormData) => {
     dispatch(addProductsActions.addProductsLoadingState(true));
 
-    const baseURL =
-      process.env.NODE_ENV === "development"
-        ? process.env.REACT_APP_BASE_URL_DEV
-        : process.env.REACT_APP_BASE_URL_PROD;
+    const normalizeData = { ...formData, name: formData.productName };
 
-    const normalizeData = { ...data, name: data.productName };
-    console.log(normalizeData);
-    axios
+    const postData = await axios
       .post(`${baseURL}/admin/product`, normalizeData)
       .then((res) => {
-        console.log(res);
         dispatch(addProductsActions.addProducts(200));
       })
       .catch((err) => {
@@ -39,6 +39,7 @@ const AddProductsFormWrapper = ({ children }: Props) => {
         );
         console.log(err);
       });
+    mutate(baseURL, [postData, ...data], false);
   };
 
   return (

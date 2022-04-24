@@ -6,6 +6,7 @@ type initialStateProps = {
     loading: boolean;
     error: boolean;
     status: number | null;
+    submitted: boolean;
   };
 };
 
@@ -14,6 +15,7 @@ const initialState: initialStateProps = {
     loading: false,
     error: false,
     status: null,
+    submitted: false,
   },
 };
 
@@ -28,11 +30,14 @@ const addProductsSlice = createSlice({
       state.addProducts.error = action.payload.error;
       state.addProducts.status = action.payload.status;
       state.addProducts.loading = false;
+      state.addProducts.submitted = true;
     },
     addProducts: (state, action: PayloadAction<number>) => {
       state.addProducts.status = action.payload;
       state.addProducts.loading = false;
+      state.addProducts.submitted = true;
     },
+    reset: () => initialState,
   },
 });
 

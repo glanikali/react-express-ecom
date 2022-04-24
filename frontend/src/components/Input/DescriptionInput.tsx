@@ -30,7 +30,7 @@ const DescriptionInput = ({ maxWidth = false }: Props) => {
         onFocus={() => handleOnFocus()}
         className={buildInputClassName({
           hasError: !!error,
-          className: `h-[65px] w-full bg-zinc-100	p-2 rounded focus:outline-0 ${
+          className: `h-14 w-full bg-zinc-100	p-2 rounded focus:outline-0 ${
             maxWidth ? "w-full" : "sm:w-[550px]"
           } text-xl text-left border-2 ${
             outline ? "border-violet-800 drop-shadow-md" : "border-transparent"

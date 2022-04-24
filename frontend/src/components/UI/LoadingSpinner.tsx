@@ -1,8 +1,15 @@
 import React from "react";
 
-const Spinner = () => {
+interface Props {
+  className?: string;
+}
+const Spinner = ({ className = "" }: Props) => {
   return (
-    <div className="border-8 border-solid rounded-[50%] border-t-violet-800 h-[120px] w-[120px] animate-spin"></div>
+    <div
+      className={`border-4 border-solid rounded-[50%] border-t-pink-500 animate-spin ${
+        className ? className : " h-[120px] w-[120px]"
+      }`}
+    ></div>
   );
 };
 

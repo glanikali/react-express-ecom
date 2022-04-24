@@ -6,8 +6,23 @@ import PriceInput from "./components/Input/PriceInput";
 import Submit from "./components/Input/Submit";
 import DescriptionInput from "./components/Input/DescriptionInput";
 import ImageInput from "./components/Input/ImageInput";
+import FeedbackHTTP from "./components/Form/FeedbackHTTP";
+import { useAppSelector } from "./store/hooks";
 
 const AddProducts = () => {
+  const { status, loading, submitted } = useAppSelector(
+    (state) => state.addProductReducer.addProducts
+  );
+
+  //reset form on status 200
+  // useEffect(() => {
+  //   if (status === 200) {
+  //     reset();
+  //     dispatch(addProductsActions.reset());
+  //   }
+  // }, [status]);
+
+  
   return (
     <Container>
       <Card className="mx-auto w-full lg:w-[80ch]">
@@ -19,12 +34,18 @@ const AddProducts = () => {
         </div>
         <hr />
         <AddProductsFormWrapper>
-          <ProductNameInput maxWidth />
-          <PriceInput maxWidth />
-          <ImageInput maxWidth />
-          <DescriptionInput maxWidth />
-          <hr className="col-span-2" />
-          <Submit className="col-span-2" />
+          {submitted ? (
+            <FeedbackHTTP status={status} />
+          ) : (
+            <>
+              <ProductNameInput maxWidth />
+              <PriceInput maxWidth />
+              <ImageInput maxWidth />
+              <DescriptionInput maxWidth />
+              <hr className="col-span-2" />
+              <Submit loading={loading} className="col-span-2" />
+            </>
+          )}
         </AddProductsFormWrapper>
       </Card>
     </Container>

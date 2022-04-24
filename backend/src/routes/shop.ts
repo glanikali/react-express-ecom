@@ -1,6 +1,6 @@
 import {Router} from "express";
 import {
-  landingPage,
+  getAllProducts,
   getCartView,
   notFound,
   postAddToCart,
@@ -9,7 +9,7 @@ import {
 
 const router = Router();
 
-router.get("/", landingPage);
+router.get("/", getAllProducts);
 router.get("/product/:productId", getSingleProduct);
 router.get("/cart", getCartView);
 router.post("/cart", postAddToCart);

@@ -4,16 +4,17 @@ import Product from "../model/product.js";
 import Cart from "../model/cart.js";
 import { fetchAllDB } from "../data/index.js";
 
-export const landingPage = async (
+export const getAllProducts = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const products = await fetchAllDB();
-  res.render(path.join(__dirname, "../", "views", "shop.pug"), {
-    title: "Shop",
-    products,
-  });
+  const products = await fetchAllDB()
+    .then((response) => {
+      console.log(response);
+      res.status(200).json(response);
+    })
+    .catch((err) => res.status(400).json("error"));
 };
 
 export const getSingleProduct = async (

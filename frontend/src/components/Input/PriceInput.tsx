@@ -28,7 +28,7 @@ const PriceInput = ({ maxWidth = false }: Props) => {
           outline ? "border-violet-800 drop-shadow-md" : "border-transparent"
         }`}
       >
-        <label className="h-[65px] w-full bg-zinc-100 grid" htmlFor="price">
+        <label className="h-14 w-full bg-zinc-100 grid" htmlFor="price">
           <p className="place-self-center text-xl">$</p>
         </label>
         <input
@@ -42,7 +42,7 @@ const PriceInput = ({ maxWidth = false }: Props) => {
           placeholder="Price"
           className={buildInputClassName({
             hasError: !!error,
-            className: `h-[65px] w-full rounded bg-zinc-100 col-span-9 focus:outline-0 p-2  ${
+            className: `h-full w-full rounded bg-zinc-100 col-span-9 focus:outline-0 p-2  ${
               maxWidth ? "w-full" : "sm:w-[550px]"
             } text-xl text-left`,
           })}
