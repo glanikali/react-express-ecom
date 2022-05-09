@@ -1,6 +1,6 @@
 import { useLottie } from "lottie-react";
 
-const Animation = ({ json, ...props }) => {
+const Animation = ({ json }: any) => {
   const options = {
     animationData: json,
     loop: true,

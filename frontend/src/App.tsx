@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
-import AddProducts from "./AddProducts";
-import Shop from "./Shop";
+import AddProducts from "./pages/AddProducts";
+import Shop from "./pages/Shop";
+import SingleProduct from "./pages/SingleProduct";
 import { SWRConfig } from "swr";
 import axios from "axios";
 
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Shop />} />
             <Route path="/admin/add-product" element={<AddProducts />} />
+            <Route path="/product/:id" element={<SingleProduct />} />
           </Routes>
         </Layout>
       </SWRConfig>

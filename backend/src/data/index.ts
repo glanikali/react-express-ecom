@@ -4,15 +4,14 @@ const prisma = new PrismaClient();
 
 export const newProductDB = async (product: ProductClass) => {
   const { name, price, image_url, description } = product;
-  const res = await prisma.products
-    .create({
-      data: {
-        name,
-        price,
-        image_url,
-        description,
-      },
-    })
+  const res = await prisma.products.create({
+    data: {
+      name,
+      price,
+      image_url,
+      description,
+    },
+  });
   return res;
 };
 

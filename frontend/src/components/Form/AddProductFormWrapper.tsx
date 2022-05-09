@@ -28,9 +28,10 @@ const AddProductsFormWrapper = ({ children }: Props) => {
 
     const normalizeData = { ...formData, name: formData.productName };
 
-    const postData = await axios
+     axios
       .post(`${baseURL}/admin/product`, normalizeData)
       .then((res) => {
+        mutate(baseURL, [res, ...data], false);
         dispatch(addProductsActions.addProducts(200));
       })
       .catch((err) => {
@@ -39,7 +40,6 @@ const AddProductsFormWrapper = ({ children }: Props) => {
         );
         console.log(err);
       });
-    mutate(baseURL, [postData, ...data], false);
   };
 
   return (

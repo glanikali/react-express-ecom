@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import path from "path";
 import Product from "../model/product.js";
 import Cart from "../model/cart.js";
-import { fetchAllDB } from "../data/index.js";
+import { fetchAllDB, getProductById } from "../data/index.js";
 
 export const getAllProducts = async (
   req: Request,
@@ -22,15 +22,14 @@ export const getSingleProduct = async (
   res: Response,
   next: NextFunction
 ) => {
-  const products = await Product.fetchAll();
-  const productId = req.params.productId;
-  const filteredProducts = products.filter(
-    (el) => el.id === parseInt(productId)
-  );
-  res.render(path.join(__dirname, "../", "views", "product.pug"), {
-    title: filteredProducts[0].name,
-    filteredProducts,
-  });
+  const { id } = req.params;
+  const idNumber = parseInt(id);
+  const product = await getProductById(idNumber)
+    .then((response) => {
+      console.log(response);
+      res.status(200).json(response);
+    })
+    .catch((err) => res.status(400).json("error"));
 };
 
 export const notFound = (req: Request, res: Response, next: NextFunction) => {

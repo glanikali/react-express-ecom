@@ -1,13 +1,13 @@
-import AddProductsFormWrapper from "./components/Form/AddProductFormWrapper";
-import Container from "./components/UI/Container";
-import Card from "./components/UI/Card";
-import ProductNameInput from "./components/Input/ProductNameInput";
-import PriceInput from "./components/Input/PriceInput";
-import Submit from "./components/Input/Submit";
-import DescriptionInput from "./components/Input/DescriptionInput";
-import ImageInput from "./components/Input/ImageInput";
-import FeedbackHTTP from "./components/Form/FeedbackHTTP";
-import { useAppSelector } from "./store/hooks";
+import AddProductsFormWrapper from "../components/Form/AddProductFormWrapper";
+import Container from "../components/UI/Container";
+import Card from "../components/UI/Card";
+import ProductNameInput from "../components/Input/ProductNameInput";
+import PriceInput from "../components/Input/PriceInput";
+import Submit from "../components/Input/Submit";
+import DescriptionInput from "../components/Input/DescriptionInput";
+import ImageInput from "../components/Input/ImageInput";
+import FeedbackHTTP from "../components/Form/FeedbackHTTP";
+import { useAppSelector } from "../store/hooks";
 
 const AddProducts = () => {
   const { status, loading, submitted } = useAppSelector(
