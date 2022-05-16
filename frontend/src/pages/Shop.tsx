@@ -5,15 +5,15 @@ import { ProductInterface } from "../Interfaces/index";
 
 const Shop = () => {
   const { data, error } = useSWR(baseURL);
-  if (error) {
-    console.log("error state");
-  }
-  if (!data) {
-    console.log("loading");
-  }
-  if (data) {
-    console.log(data);
-  }
+  // if (error) {
+  //   console.log("error state");
+  // }
+  // if (!data) {
+  //   console.log("loading");
+  // }
+  // if (data) {
+  //   console.log(data);
+  // }
   return (
     <div className="grid gap-4 grid-cols-1">
       <h1>Shop</h1>

@@ -5,6 +5,7 @@ const mainNav = [
   { name: "Cart", path: "/cart" },
   { name: "Add Products", path: "/admin/add-product" },
   { name: "Manage Products", path: "/admin/manage-products" },
+  { name: "Auth", path: "/auth" },
 ];
 
 const Header = () => {

@@ -6,7 +6,8 @@
   h1,
   h2,
   h3,
-  h4 {
+  h4,
+  legend {
     @apply font-header text-2xl;
   }
   p,

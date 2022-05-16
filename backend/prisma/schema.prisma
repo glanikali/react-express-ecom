@@ -12,12 +12,13 @@ datasource db {
 }
 
 model users {
-  id       Int      @id @default(autoincrement())
-  username String
+  id       Int        @id @default(autoincrement())
+  username String?
   password String
-  email    String
+  email    String     @unique
   cart     carts?
   orders   orders[]
+  products products[]
 }
 
 model products {
@@ -27,6 +28,8 @@ model products {
   image_url   String?
   description String?
   carts       productsOnCart[]
+  users       users?           @relation(fields: [usersId], references: [id])
+  usersId     Int?
 }
 
 model carts {

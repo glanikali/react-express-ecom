@@ -1,5 +1,5 @@
-import { PrismaClient, Prisma } from "@prisma/client";
-import { CartClass, ProductClass } from "../model/types";
+import { PrismaClient } from "@prisma/client";
+import { ProductClass } from "../model/types";
 const prisma = new PrismaClient();
 
 export const newProductDB = async (product: ProductClass) => {
