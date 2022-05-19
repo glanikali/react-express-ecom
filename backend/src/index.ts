@@ -4,12 +4,15 @@ import adminRoutes from "./routes/admin.js";
 import shopRoutes from "./routes/shop.js";
 import authRoutes from "./routes/auth.js";
 import { corsMiddleware } from "./cors/index.js";
-import mongoose from "mongoose";
 import session from "express-session";
 import passport from "passport";
-import MongoStore from "connect-mongo";
+import { createClient } from "redis";
+import connectRedis from "connect-redis";
 import "dotenv/config";
 import "./passport/passport";
+
+//
+const RedisStore = connectRedis(session);
 
 const app: Express = express();
 
@@ -19,17 +22,25 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
+//redis client
+const client = createClient({ legacyMode: true });
+client.connect().catch(console.error);
+
 app.use(
   session({
     secret: "foo",
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: process.env.SESSION_DATABASE_URL,
-      collectionName: "sessions",
+
+    store: new RedisStore({
+      host: "127.0.0.1",
+      port: 6379,
+      client,
+      ttl: 260,
     }),
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,
+      secure: process.env.NODE_ENV !== "production" ? false : true,
     },
   })
 );

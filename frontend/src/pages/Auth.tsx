@@ -7,10 +7,16 @@ import Button from "../components/UI/Button";
 import Container from "../components/UI/Container";
 import Card from "../components/UI/Card";
 import { useSearchParams } from "react-router-dom";
+import axios from "axios";
 
 const Auth = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const register = searchParams.get("register") || "";
+  const handleClick = async () => {
+    const req = axios
+      .get("http://localhost:3001/auth/logout", { withCredentials: true })
+      .then((res) => console.log(res));
+  };
   return (
     <>
       {!register ? (
@@ -70,6 +76,7 @@ const Auth = () => {
           </Card>
         </Container>
       )}
+      <button onClick={handleClick}>Logout</button>
     </>
   );
 };

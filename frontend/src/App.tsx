@@ -11,7 +11,10 @@ function App() {
   return (
     <BrowserRouter>
       <SWRConfig
-        value={{ fetcher: (url) => axios.get(url).then((res) => res.data) }}
+        value={{
+          fetcher: (url) =>
+            axios.get(url, { withCredentials: true }).then((res) => res.data),
+        }}
       >
         <Layout>
           <Routes>

@@ -1,10 +1,7 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import { connection } from "./database";
 import { validPassword } from "../lib/password";
-import { doesNotMatch } from "assert";
-
-const User = connection.models.User;
+import { doesUserExist, findUserById } from "../data/auth";
 
 const customFields = {
   usernameField: "email",
@@ -23,8 +20,9 @@ interface Done {
 }
 
 const verifyCallback = (username: string, password: string, done: Done) => {
-  User.findOne({ username: username })
-    .then((user) => {
+  // todo: with prisma
+  const result = doesUserExist(username)
+    .then((user: UserType) => {
       if (!user) {
         return done(null, false);
       }
@@ -47,8 +45,9 @@ interface DoneSerialize {
 passport.serializeUser((user: UserType, done: DoneSerialize) => {
   done(null, user.id);
 });
-passport.deserializeUser((userId: string | number, done: Done) => {
-  User.findById(userId)
+passport.deserializeUser((userId: number, done: Done) => {
+  //todo prisma
+  const result = findUserById(userId)
     .then((user) => done(null, user))
     .catch((err) => done(err));
 });
