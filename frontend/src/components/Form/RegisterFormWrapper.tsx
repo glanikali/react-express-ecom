@@ -3,8 +3,9 @@ import { Register, buildDefaultRegisterValues } from ".";
 import axios from "axios";
 import { baseURL } from "../../lib/baseUrl";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { AuthActions } from "../../store/auth";
+import { useEffect } from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -14,23 +15,46 @@ const RegisterFormWrapper = ({ children }: Props) => {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
-
+  const { register } = useAppSelector((state) => state.AuthReducer);
   const methods = useForm<Register>({
     defaultValues: buildDefaultRegisterValues(),
   });
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
+
+  useEffect(() => {
+    if (register.submitted) {
+      if (register.error) {
+        reset();
+      }
+      if (register.success) {
+        dispatch(AuthActions.resetRegisterState());
+        reset();
+      }
+    }
+  }, [register, reset, dispatch]);
 
   const onSubmit = (registerObject: Register) => {
     console.log(registerObject);
     axios
       .post(`${baseURL}/auth/registration`, registerObject)
       .then((res) => {
+        dispatch(
+          AuthActions.updateRegisterState({
+            error: false,
+            submitted: true,
+            success: true,
+          })
+        );
         navigate("/", { replace: true });
       })
       .catch((err) => {
         dispatch(
-          AuthActions.updateRegisterState({ error: true, submitted: true })
+          AuthActions.updateRegisterState({
+            error: true,
+            submitted: true,
+            success: false,
+          })
         );
       });
   };

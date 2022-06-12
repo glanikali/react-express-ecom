@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import RegisterFormWrapper from "../components/Form/RegisterFormWrapper";
 import LoginFormWrapper from "../components/Form/LoginFormWrapper";
 import EmailInput from "../components/Input/EmailInput";
@@ -8,10 +8,17 @@ import Container from "../components/UI/Container";
 import Card from "../components/UI/Card";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
+import { useAppSelector } from "../store/hooks";
 
 const Auth = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const register = searchParams.get("register") || "";
+
+  const { login: loginState, register: registerState } = useAppSelector(
+    (state) => state.AuthReducer
+  );
+
+
   const handleClick = async () => {
     const req = axios
       .get("http://localhost:3001/auth/logout", { withCredentials: true })
@@ -29,9 +36,10 @@ const Auth = () => {
               </p>
             </div>
             <hr />
+            {loginState.error && <p className="text-red-500">Incorrect email/password</p>}
             <fieldset>
               <LoginFormWrapper>
-                <EmailInput maxWidth />
+                <EmailInput maxWidth  />
                 <PasswordInput maxWidth />
                 <Button type="submit">Submit</Button>
               </LoginFormWrapper>

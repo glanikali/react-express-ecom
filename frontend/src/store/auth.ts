@@ -9,11 +9,13 @@ type Auth = {
 type Register = {
   error: boolean;
   submitted: boolean;
+  success: boolean;
 };
 
 type Login = {
   error: boolean;
   submitted: boolean;
+  success: boolean;
 };
 
 type initialStateProps = {
@@ -27,10 +29,12 @@ const initialState: initialStateProps = {
   register: {
     error: false,
     submitted: false,
+    success: false,
   },
   login: {
     error: false,
     submitted: false,
+    success: false,
   },
 };
 
@@ -46,6 +50,12 @@ const AuthSlice = createSlice({
     },
     updateLoginState: (state, action: PayloadAction<Login>) => {
       state.login = action.payload;
+    },
+    resetRegisterState: (state) => {
+      state.register = initialState.register;
+    },
+    resetLoginState: (state) => {
+      state.login = initialState.login;
     },
   },
 });

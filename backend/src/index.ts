@@ -6,7 +6,8 @@ import authRoutes from "./routes/auth.js";
 import { corsMiddleware } from "./cors/index.js";
 import session from "express-session";
 import passport from "passport";
-import { createClient } from "redis";
+// import { createClient } from "redis";
+import Redis from "ioredis";
 import connectRedis from "connect-redis";
 import "dotenv/config";
 import "./passport/passport";
@@ -23,8 +24,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 //redis client
-const client = createClient({ legacyMode: true });
-client.connect().catch(console.error);
+// const client = createClient({
+//   legacyMode: true,
+//   socket: {
+//     port: parseInt(process.env.REDIS_PORT),
+//     host: process.env.REDIS_HOST,
+//   },
+// });
+// client.connect().catch(console.error);
+
+let client = new Redis({
+  host: process.env.REDIS_HOST,
+  password: process.env.REDIS_PASSWORD,
+  port: parseInt(process.env.REDIS_PORT),
+});
 
 app.use(
   session({
@@ -33,8 +46,9 @@ app.use(
     saveUninitialized: false,
 
     store: new RedisStore({
-      host: "127.0.0.1",
-      port: 6379,
+      host: process.env.REDIS_HOST,
+      pass: process.env.REDIS_PASSWORD,
+      port: parseInt(process.env.REDIS_PORT),
       client,
       ttl: 260,
     }),
