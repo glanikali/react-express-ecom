@@ -19,16 +19,16 @@
 
 Add these variables:
 
-DATABASE_URL="postgresql://postgres:PASSWORD@localhost:5432/DBNAME?schema=public"
-DB_HOST= postgres
-DB_PORT= 5433
-DB_USER= postgres
-DB_PASSWORD= postgres
-DB_NAME= postgres
-REDIS_HOST= 127.0.0.1
-REDIS_PORT= 6379
-REDIS_PASSWORD= password
-CHOKIDAR_USEPOLLING= true
+- DATABASE_URL="postgresql://postgres:PASSWORD@localhost:5432/DBNAME?schema=public"
+- DB_HOST= postgres
+- DB_PORT= 5433
+- DB_USER= postgres
+- DB_PASSWORD= postgres
+- DB_NAME= postgres
+- REDIS_HOST= 127.0.0.1
+- REDIS_PORT= 6379
+- REDIS_PASSWORD= password
+- CHOKIDAR_USEPOLLING= true
 
 4. npx prisma generate
 
