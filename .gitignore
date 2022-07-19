@@ -12,3 +12,7 @@
 # dist
 /backend/dist
 /frontend/build
+
+# db dir for docker 
+/db
+dump.rdb
