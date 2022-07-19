@@ -4,7 +4,7 @@
 
 1. cd backend & yarn install
 2. cd frontend & yarn install  
-3. cd frontend mkdir .env 
+3. cd frontend touch .env 
 
 Add these variables:
 - REACT_APP_BASE_URL_DEV=http://localhost:3001
